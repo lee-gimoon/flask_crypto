@@ -2,10 +2,10 @@
 import asyncio
 from binance import AsyncClient, BinanceSocketManager
 from flask import Flask, render_template
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO # flask_socketio: Flask 애플리케이션에서 Socket.IO를 사용하기 위한 확장입니다.
 
-app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
+app = Flask(__name__) # 이 부분은 Flask 웹 애플리케이션 인스턴스를 생성합니다. __name__ 변수는 현재 실행 중인 모듈의 이름을 나타냅니다. Flask는 이를 사용하여 어디에서 애플리케이션의 리소스를 찾아야 할지(예: 템플릿 디렉토리) 결정합니다.
+socketio = SocketIO(app, cors_allowed_origins="*") 
 
 async def binance_client():
     client = await AsyncClient.create()
@@ -26,6 +26,12 @@ def index():
 def start_binance_client():
     asyncio.run(binance_client())
 
-if __name__ == "__main__":
-    socketio.start_background_task(target=start_binance_client)
-    socketio.run(app, debug=True)
+if __name__ == "__main__": # if __name__ == "__main__": 구문 아래에 있는 코드는 스크립트나 모듈이 직접 실행될 때만 실행되며, 다른 스크립트나 모듈에 의해 import될 때는 실행되지 않습니다.
+    socketio.start_background_task(target=start_binance_client) # Binance 클라이언트를 백그라운드 작업으로 시작합니다.
+    socketio.run(app, debug=True) # Flask 앱을 실행합니다.
+
+
+# __name__ 변수에 대한 이해:
+# Python에서 스크립트나 모듈이 실행될 때, 그 스크립트나 모듈의 __name__이라는 내장 변수가 생성됩니다.
+# 스크립트나 모듈이 직접 실행될 때 (예: python myscript.py), __name__ 변수는 "__main__"으로 설정됩니다.
+# 반면, 어떤 모듈이 다른 스크립트나 모듈에 의해 import될 때, __name__ 변수는 해당 모듈의 이름으로 설정됩니다.
