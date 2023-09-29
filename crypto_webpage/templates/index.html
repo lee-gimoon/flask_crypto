@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTC Price</title>
+
+    <!-- <script> 태그는 HTML 문서 내에서 JavaScript 코드를 포함하거나 외부 JavaScript 파일을 참조하기 위해 사용됩니다. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script> <!-- <script> 태그의 src 속성은 외부에 작성된 JavaScript 파일을 HTML 문서에 연결할 때 사용합니다. -->
+    <script>
+        const socket = io.connect('http://localhost:5000'); // const는 자바스크립트의 키워드 중 하나로, 변수를 선언할 때 사용됩니다. const를 사용하여 선언된 변수는 재할당(수정)할 수 없습니다. 그러나 const로 선언된 객체나 배열의 내부 요소는 수정 가능합니다.
+        socket.on('btc_price_update', function(data) {
+            document.getElementById('BTC').innerText = 'BTC: ' + data.btc_price + ' USDT'; });
+        /* 'btc_price_update'(이벤트)는 소켓 연결을 통해 클라이언트와 서버간에 전송 된 메시지입니다. 참고로 이벤트 이름은 서버와 클라이언트에서 동일하게 선언하여야 합니다. (JSON, 문자열, 이진 등 모든 형식의 데이터 포함 가능)
+            function(data) 함수는 이벤트가 발생했을때 실행되는 함수이다. 이 콜백 함수는 data라는 매개변수를 가지며, 이는 이벤트를 발송하는 측에서 전달하는 데이터를 받게 됩니다. 
+            참고로 data 매개변수에 전달받은 인자는 객체 {'price': price}이다. {'price': price}는 JavaScript에서 객체(object)를 표현하는 리터럴 문법입니다. (파이썬에서는 딕셔너리) */
+    </script>
+
+</head>
+<body>
+    <h2 id="BTC">BTC: ... USDT</h2> <!-- document.getElementById('BTC'): id의 속성값이 BTC인 HTML 요소를 찾는다. -->
+</body>
+</html>
+
+<!-- function(data) {}에 대하여 알아보자!
+function(data) { }는 JavaScript에서의 함수 선언 구문 중 하나입니다. 이 구문은 이름 없는 함수, 즉 "익명 함수(anonymous function)"를 선언합니다.
+
+여기서 주의 깊게 볼 부분은:
+function: JavaScript에서 함수를 선언하는 키워드입니다.
+(data): 함수가 받는 인자나 매개변수를 나타냅니다. 이 예에서는 data라는 하나의 매개변수를 받는 것으로 정의되어 있습니다.
+{ }: 중괄호 { } 안에는 함수가 호출될 때 실행될 코드가 들어갑니다. 현재는 비어 있으므로 이 함수는 아무런 동작도 하지 않습니다. -->
+

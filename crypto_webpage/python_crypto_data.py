@@ -17,9 +17,9 @@ async def binance_client():
             data = await tscm_btc.recv()
             price = round(float(data['p']))
             # print('BTC:', price, 'USDT')
-            socketio.emit('btc_price_update', {'price': price})
+            socketio.emit('btc_price_update', {'btc_price': price}) # 객체 {'price': price}가 클라이언트 측의 이벤트 리스너로 전달된다. 즉, 이 객체는 인자로써 클라이언트의 function(data) {...} 함수의 data 매개변수로 들어가게된다.
 
-@app.route('/')
+@app.route('/') # 데코레이터이기 때문에 index = app.route('/')(index) 와 같음. 즉, app.route('/')(index) 고차 함수가 호출된다는 말. (flask_doc폴더의 decorator파일 참조.)
 def index():
     return render_template('index.html')
 
