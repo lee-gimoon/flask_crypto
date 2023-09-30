@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BTC Price</title>
+</head>
+<body>
+    <h2 id="BTC">BTC: ... USDT</h2> <!-- document.getElementById('BTC'): id의 속성값이 BTC인 HTML 요소를 찾는다. -->
 
     <!-- <script> 태그는 HTML 문서 내에서 JavaScript 코드를 포함하거나 외부 JavaScript 파일을 참조하기 위해 사용됩니다. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script> <!-- <script> 태그의 src 속성은 외부에 작성된 JavaScript 파일을 HTML 문서에 연결할 때 사용합니다. -->
@@ -17,10 +20,6 @@
             function(data) 함수는 이벤트가 발생했을때 실행되는 함수이다. 이 콜백 함수는 data라는 매개변수를 가지며, 이는 이벤트를 발송하는 측에서 전달하는 데이터를 받게 됩니다. 
             참고로 data 매개변수에 전달받은 인자는 객체 {'price': price}이다. {'price': price}는 JavaScript에서 객체(object)를 표현하는 리터럴 문법입니다. (파이썬에서는 딕셔너리) */
     </script>
-
-</head>
-<body>
-    <h2 id="BTC">BTC: ... USDT</h2> <!-- document.getElementById('BTC'): id의 속성값이 BTC인 HTML 요소를 찾는다. -->
 </body>
 </html>
 

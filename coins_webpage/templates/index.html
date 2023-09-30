@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance Price Viewer</title>
+    <style>
+        .center-text {
+            text-align: center;
+            padding: 50px 0;
+        }
+        .price-display {
+            font-size: 24px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-text">
+        <h1>Binance Real-time Prices</h1>
+        <div class="price-display" id="BTC">BTC: - USDT</div>
+        <div class="price-display" id="ETH">ETH: - USDT</div>
+        <div class="price-display" id="XRP">XRP: - USDT</div>
+        <div class="price-display" id="NEO">NEO: - USDT</div>
+        <div class="price-display" id="QTUM">QTUM: - USDT</div>
+        <div class="price-display" id="GAS">GAS: - USDT</div>
+        <div class="price-display" id="FLM">FLM: - USDT</div>
+        <div class="price-display" id="ONT">ONT: - USDT</div>
+        <div class="price-display" id="EOS">EOS: - USDT</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script type="text/javascript">
+        'use strict';
+        const socket = io.connect('http://localhost:5000/');
+        
+        const cryptos = ['BTC', 'ETH', 'XRP', 'NEO', 'QTUM', 'GAS', 'FLM', 'ONT', 'EOS'];
+        
+        for (const crypto of cryptos) {
+            socket.on(`${crypto.toLowerCase()}_price_update`, function(data) {
+                document.getElementById(crypto).innerText = `${crypto}: ${data[`${crypto.toLowerCase()}_price`]} USDT`;
+            });
+        }
+    </script>
+</body>
+</html>
