@@ -1,3 +1,6 @@
+
+# 바이낸스 다수의 코인들에 대한 실시간 가격을 띄우는 웹.
+
 import asyncio
 from binance import AsyncClient, BinanceSocketManager
 from flask import Flask, render_template
@@ -27,8 +30,8 @@ async def binance_client():
     # 이 때, 함수에 인자로 전달되는 개별 값들 사이에는 컴마(,)가 암시적으로 들어갑니다.
 
 @app.route('/')
-def index():
-    return render_template('index.html') 
+def multiple_coin():
+    return render_template('multiple_coin.html') 
 
 def start_binance_client():
     asyncio.run(binance_client())
@@ -39,7 +42,7 @@ if __name__ == "__main__":
 
 
 
-# binance_coin_webpage 폴더의 coin.py 파일에 있는 코드와 차이점.
+# binance_two_coin_web 폴더의 two_coin.py 파일에 있는 코드와 차이점.
 # 1.코드 재사용성 (Code Reusability): 위 코드의 방식은 각 암호화폐에 대한 웹소켓 처리 로직을 재사용하는 방식으로 작성되었습니다. 이러한 방식은 새로운 암호화폐를 추가하거나 수정할 때 매우 효율적입니다.
 
 # 2.코드 길이와 가독성 (Code Length and Readability): 위 코드의 방식은 코드가 짧고 깔끔합니다. 새로운 암호화폐를 추가하려면 `cryptos` 리스트에만 심볼을 추가하면 됩니다.

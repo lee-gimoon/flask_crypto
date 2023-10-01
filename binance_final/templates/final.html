@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance Price Viewer</title>
+    <style>
+        .center-text {
+            text-align: center;
+            padding: 30px 50px;
+            border: 1px solid #e1e1e1;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .price-display, .name-display {
+            font-size: 20px;
+            flex: 1;
+            border-right: 1px solid #e1e1e1;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* 위아래 내용을 분리 */
+            align-items: center;     /* 좌우 중앙 정렬 */
+            height: 100px;           /* 고정 높이 설정 */
+        }
+
+        .price-display:last-child {
+            border-right: none;
+        }
+
+        .label {
+            font-weight: bold;
+            border-bottom: 1px solid #e1e1e1;
+            padding-bottom: 5px;
+            width: 100%;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="center-text">
+        <div class="name-display">
+            <div class="label">이름</div>
+            <div>비트코인</div>
+        </div>
+        <div class="price-display">
+            <div class="label">거래 가격</div>
+            <span id="trade_price">- USDT</span>
+        </div>
+        <div class="price-display">
+            <div class="label">24시간 변동률</div>
+            <span id="change_rate">- %</span>
+        </div>
+        <div class="price-display">
+            <div class="label">24시간 거래량</div>
+            <span id="volume">- USDT</span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script type="text/javascript">
+        const socket = io.connect('http://localhost:5000/');
+
+        socket.on('btc_price_update', function(data) {
+            document.getElementById("trade_price").innerText = data.btc_price + " USDT";
+        });
+
+        socket.on('ticker_update', function(data) {
+            document.getElementById("change_rate").innerText = data.change_rate + "%";
+            document.getElementById("volume").innerText = data.volume.toLocaleString() + " USDT";
+        });
+    </script>
+</body>
+</html>

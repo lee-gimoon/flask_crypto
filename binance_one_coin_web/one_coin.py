@@ -1,4 +1,6 @@
 
+# 단 하나의 코인 실시간 가격을 웹페이지에 띄어보자.
+
 import asyncio
 from binance import AsyncClient, BinanceSocketManager
 from flask import Flask, render_template
@@ -20,8 +22,8 @@ async def binance_client():
             socketio.emit('btc_price_update', {'btc_price': price}) # 객체 {'price': price}가 클라이언트 측의 이벤트 리스너로 전달된다. 즉, 이 객체는 인자로써 클라이언트의 function(data) {...} 함수의 data 매개변수로 들어가게된다.
 
 @app.route('/') # 데코레이터이기 때문에 index = app.route('/')(index) 와 같음. 즉, app.route('/')(index) 고차 함수가 호출된다는 말. (flask_doc폴더의 decorator파일 참조.)
-def index():
-    return render_template('index.html')
+def one_coin():
+    return render_template('one_coin.html')
 
 def start_binance_client():
     asyncio.run(binance_client())

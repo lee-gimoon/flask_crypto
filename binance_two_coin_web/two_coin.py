@@ -1,3 +1,6 @@
+
+# 두개의 코인의 실시간 가격을 웹페이지에 띄어보자.
+
 import asyncio
 from binance import AsyncClient, BinanceSocketManager
 from flask import Flask, render_template
@@ -30,8 +33,8 @@ async def binance_client():
     await asyncio.gather(handle_btc_socket(ts_btc), handle_eth_socket(ts_eth))
 
 @app.route('/')
-def coin():
-    return render_template('coin.html')
+def two_coin():
+    return render_template('two_coin.html')
 
 def start_binance_client():
     asyncio.run(binance_client())
