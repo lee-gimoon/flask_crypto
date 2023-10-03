@@ -1,4 +1,4 @@
-# 바이낸스 거래소의 futures에서 perpetual 계약의 usdt거래쌍 코인들 분석.
+# 바이낸스 거래소의 futures에서 perpetual(무기한) 계약의 usdt거래쌍 코인들 분석.
 
 from binance.client import Client
 

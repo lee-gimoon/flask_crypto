@@ -1,4 +1,5 @@
-# trade_socket으로 가격을 symbol_ticker_socket으로는 등락율과 볼륨을 가져오기. (symbol_ticker_socket으로도 가격을 가져올 수 있으나 trade_socket이 조금 더 빠름.)
+
+# trade_socket으로는 가격을, symbol_ticker_socket으로는 등락율과 볼륨을 가져오기. (symbol_ticker_socket으로도 가격을 가져올 수 있으나 trade_socket이 조금 더 빠름.)
 
 import asyncio
 from binance import AsyncClient, BinanceSocketManager

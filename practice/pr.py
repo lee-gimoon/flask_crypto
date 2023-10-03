@@ -39,8 +39,8 @@ async def binance_client():
     await asyncio.gather(*all_tasks)
 
 @app.route('/')
-def final():
-    return render_template('final.html')
+def pr():
+    return render_template('pr.html')
 
 def start_binance_client():
     asyncio.run(binance_client())
