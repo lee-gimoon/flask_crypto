@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTC Price</title>
+    <title>Coin Prices</title>
 </head>
 <body>
-    <div id="BTC">BTC: Loading...</div>
-    <div id="ETH">ETH: Loading...</div>
-    <div id="XRP">XRP: Loading...</div>
+    <div id="KRW-BTC">BTC: Loading...</div>
+    <div id="KRW-ETH">ETH: Loading...</div>
+    <div id="KRW-XRP">XRP: Loading...</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script type="text/javascript">
-        const socket = io.connect('http://localhost:5000');  // Flask 서버의 주소로 변경
+        const socket = io.connect('http://localhost:5000');
 
-        socket.on('btc_price_update', function(data) {
-            document.getElementById('BTC').innerText = 'BTC: ' + data.btc_price + ' KRW';
+        socket.on('KRW-BTC', function(data) {
+            document.getElementById('KRW-BTC').innerText = 'BTC: ' + data['KRW-BTC'] + ' KRW';
         });
 
-        socket.on('eth_price_update', function(data) {
-            document.getElementById('ETH').innerText = 'ETH: ' + data.eth_price + ' KRW';
+        socket.on('KRW-ETH', function(data) {
+            document.getElementById('KRW-ETH').innerText = 'ETH: ' + data['KRW-ETH'] + ' KRW';
         });
 
-        socket.on('xrp_price_update', function(data) {
-            document.getElementById('XRP').innerText = 'XRP: ' + data.xrp_price + ' KRW';
+        socket.on('KRW-XRP', function(data) {
+            document.getElementById('KRW-XRP').innerText = 'XRP: ' + data['KRW-XRP'] + ' KRW';
         });
     </script>
 </body>
