@@ -2,30 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coin Prices</title>
+    <title>Upbit Live Data</title>
+    <style>
+        .center-text {
+            text-align: center;
+            padding: 10px 50px;
+            border: 1px solid #e1e1e1;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        .price-display, .name-display {
+            font-size: 20px;
+            flex: 1;
+            border-right: 1px solid #e1e1e1;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .price-display:last-child {
+            border-right: none;
+        }
+
+        .label {
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <div id="KRW-BTC">BTC: Loading...</div>
-    <div id="KRW-ETH">ETH: Loading...</div>
-    <div id="KRW-XRP">XRP: Loading...</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    <script type="text/javascript">
-        const socket = io.connect('http://localhost:5000');
+<div class="all-coins">
+    <div class="center-text">
+        <div class="name-display">
+            <div class="label">이름</div>
+        </div>
+        <div class="price-display">
+            <div class="label">현재가</div>
+        </div>
+        <div class="price-display">
+            <div class="label">등락율</div>
+        </div>
+        <div class="price-display">
+            <div class="label">거래량</div>
+        </div>
+    </div>
 
-        socket.on('KRW-BTC', function(data) {
-            document.getElementById('KRW-BTC').innerText = 'BTC: ' + data['KRW-BTC'] + ' KRW';
-        });
+    <div class="center-text">
+        <div class="name-display">비트코인</div>
+        <div class="price-display" id="btc_trade_price">- KRW</div>
+        <div class="price-display" id="btc_change_rate">- %</div>
+        <div class="price-display" id="btc_volume">- KRW</div>
+    </div>
 
-        socket.on('KRW-ETH', function(data) {
-            document.getElementById('KRW-ETH').innerText = 'ETH: ' + data['KRW-ETH'] + ' KRW';
-        });
+    <div class="center-text">
+        <div class="name-display">이더리움</div>
+        <div class="price-display" id="eth_trade_price">- KRW</div>
+        <div class="price-display" id="eth_change_rate">- %</div>
+        <div class="price-display" id="eth_volume">- KRW</div>
+    </div>
 
-        socket.on('KRW-XRP', function(data) {
-            document.getElementById('KRW-XRP').innerText = 'XRP: ' + data['KRW-XRP'] + ' KRW';
-        });
-    </script>
+    <div class="center-text">
+        <div class="name-display">리플</div>
+        <div class="price-display" id="xrp_trade_price">- KRW</div>
+        <div class="price-display" id="xrp_change_rate">- %</div>
+        <div class="price-display" id="xrp_volume">- KRW</div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script type="text/javascript">
+    const socket = io.connect('http://localhost:5000/');
+
+    // 비트코인
+    socket.on('KRW-BTC_trade', function(data) {
+        document.getElementById("btc_trade_price").innerText = data['price'] + " KRW"; // 수정된 부분
+    });
+    socket.on('KRW-BTC_ticker', function(data) {
+        document.getElementById("btc_change_rate").innerText = data['scr'] + "%";
+        document.getElementById("btc_volume").innerText = data['atp24h'].toLocaleString() + " KRW";
+    });
+
+    // 이더리움
+    socket.on('KRW-ETH_trade', function(data) {
+        document.getElementById("eth_trade_price").innerText = data['price'] + " KRW"; // 수정된 부분
+    });
+    socket.on('KRW-ETH_ticker', function(data) {
+        document.getElementById("eth_change_rate").innerText = data['scr'] + "%";
+        document.getElementById("eth_volume").innerText = data['atp24h'].toLocaleString() + " KRW";
+    });
+
+    // 리플
+    socket.on('KRW-XRP_trade', function(data) {
+        document.getElementById("xrp_trade_price").innerText = data['price'] + " KRW"; // 수정된 부분
+    });
+    socket.on('KRW-XRP_ticker', function(data) {
+        document.getElementById("xrp_change_rate").innerText = data['scr'] + "%";
+        document.getElementById("xrp_volume").innerText = data['atp24h'].toLocaleString() + " KRW";
+    });
+</script>
 </body>
 </html>

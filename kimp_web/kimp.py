@@ -105,8 +105,8 @@ def calculate_and_emit_premium():
 
 
 @app.route('/')
-def pr():
-    return render_template('pr.html')
+def kimp():
+    return render_template('kimp.html')
 
 async def combined_client():
     await asyncio.gather(upbit_client(), binance_client())

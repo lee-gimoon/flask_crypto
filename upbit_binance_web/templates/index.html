@@ -43,7 +43,6 @@
         <div class="price-display" id="KRW-BTC_trade">- KRW</div>
         <div class="price-display" id="KRW-BTC_change_rate">- %</div>
         <div class="price-display" id="KRW-BTC_volume">- KRW</div>
-        <div class="price-display" id="KRW-BTC_premium">- % 김프</div>
     </div>
 
     <!-- ETH -->
@@ -52,7 +51,6 @@
         <div class="price-display" id="KRW-ETH_trade">- KRW</div>
         <div class="price-display" id="KRW-ETH_change_rate">- %</div>
         <div class="price-display" id="KRW-ETH_volume">- KRW</div>
-        <div class="price-display" id="KRW-ETH_premium">- % 김프</div>
     </div>
 
     <!-- XRP -->
@@ -61,7 +59,6 @@
         <div class="price-display" id="KRW-XRP_trade">- KRW</div>
         <div class="price-display" id="KRW-XRP_change_rate">- %</div>
         <div class="price-display" id="KRW-XRP_volume">- KRW</div>
-        <div class="price-display" id="KRW-XRP_premium">- % 김프</div>
     </div>
 
     <h2>Binance</h2>
@@ -121,19 +118,6 @@
     socket.on('KRW-XRP_ticker', function(data) {
         document.getElementById("KRW-XRP_change_rate").innerText = data.scr + "%";
         document.getElementById("KRW-XRP_volume").innerText = data.atp24h.toLocaleString() + " KRW";
-    });
-
-    // 업비트 김프 리스너 추가
-    socket.on('KRW-BTC_premium', function(data) {
-        document.getElementById("KRW-BTC_premium").innerText = data.premium.toFixed(2) + "% 김프";
-    });
-
-    socket.on('KRW-ETH_premium', function(data) {
-        document.getElementById("KRW-ETH_premium").innerText = data.premium.toFixed(2) + "% 김프";
-    });
-
-    socket.on('KRW-XRP_premium', function(data) {
-        document.getElementById("KRW-XRP_premium").innerText = data.premium.toFixed(2) + "% 김프";
     });
 
     // Binance Listeners
